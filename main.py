@@ -45,8 +45,8 @@ class Movie(db.Model):
     review = db.Column(db.String(250), nullable = False)
     img_url = db.Column(db.String(250), nullable = True)
 
-with app.app_context():
-    db.create_all()
+# with app.app_context():
+#     db.create_all()
 
 
 class SearchForm(FlaskForm):
@@ -58,18 +58,18 @@ class DetailsForm(FlaskForm):
     review = StringField('Review', validators=[DataRequired()])
     submit = SubmitField('Done')
 
-# with app.app_context():
-#     second_movie = Movie(
-#         title="Avatar The Way of Water",
-#         year=2022,
-#         description="Set more than a decade after the events of the first film, learn the story of the Sully family (Jake, Neytiri, and their kids), the trouble that follows them, the lengths they go to keep each other safe, the battles they fight to stay alive, and the tragedies they endure.",
-#         rating=7.3,
-#         ranking=9,
-#         review="I liked the water.",
-#         img_url="https://image.tmdb.org/t/p/w500/t6HIqrRAclMCA60NsSmeqe9RmNV.jpg"
-#     )
-    # db.session.add(second_movie)
-    # db.session.commit()
+# # with app.app_context():
+# #     second_movie = Movie(
+# #         title="Avatar The Way of Water",
+# #         year=2022,
+# #         description="Set more than a decade after the events of the first film, learn the story of the Sully family (Jake, Neytiri, and their kids), the trouble that follows them, the lengths they go to keep each other safe, the battles they fight to stay alive, and the tragedies they endure.",
+# #         rating=7.3,
+# #         ranking=9,
+# #         review="I liked the water.",
+# #         img_url="https://image.tmdb.org/t/p/w500/t6HIqrRAclMCA60NsSmeqe9RmNV.jpg"
+# #     )
+#     # db.session.add(second_movie)
+#     # db.session.commit()
 
 
 
@@ -126,6 +126,7 @@ def edit():
     movie_id = request.args.get('id')
     movie_to_update = db.get_or_404(Movie, movie_id)
     if details_form.validate_on_submit():
+        
         movie_to_update.rating = float(details_form.rating.data)
         movie_to_update.review = details_form.review.data
     #     # add_movie_data = Movie(ranking=f"{rank}", review=f"{review}")
